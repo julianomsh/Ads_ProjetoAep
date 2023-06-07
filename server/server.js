@@ -44,6 +44,10 @@ app.post('/Login', (req, res) => {
     })
 })
 
+app.post('/create',  (req, res) => {
+    const sql = "INSERT INTO "
+})
+
 
 app.listen(8081, () =>{
     console.log('Servidor rodando na porta 8081')
