@@ -10,9 +10,11 @@ const app = express();
 app.use(cors({
     credentials: true,
     origin: 'http://localhost:5173', // Defina a origem permitida,
+    methods: ["POST", "GET", "PUT"],
   }));
 app.use(cookieParser());
 app.use(express.json());
+app.use(express.static('public'));
 
 
 const con = mysql.createConnection({
@@ -28,7 +30,6 @@ con.connect(function(err){
     }else{
         console.log("conectado");
     }
-
 })
 
 app.post('/Login', (req, res) => {
@@ -38,7 +39,7 @@ app.post('/Login', (req, res) => {
         if(result.length > 0) {
             return res.json({Status: "sucesso"})
         }else{
-            return res.json({Status: "erro"})
+            return res.json({Status: "erro", Error:"E-mail ou Senha Incorreto"})
         }
     })
 })
